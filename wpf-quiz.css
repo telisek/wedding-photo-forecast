@@ -21,14 +21,14 @@
 .wpf-shell{
   background:var(--wpf-bg);
   border:1px solid var(--wpf-line);
-  border-radius:24px;
+  border-radius:0px;
   overflow:hidden;
   box-shadow:var(--wpf-shadow);
 }
-.wpf-header{padding:34px 34px 20px}
+.wpf-header{padding:2em 2em 1.5em}
 .wpf-eyebrow{
-  margin:0 0 8px;
-  font-size:12px;
+  margin:0 0 .7em;
+  font-size:1em;
   font-weight:700;
   letter-spacing:.14em;
   text-transform:uppercase;
@@ -42,22 +42,22 @@
 }
 .wpf-intro{
   max-width:720px;
-  margin:12px 0 0;
-  font-size:16px;
+  margin:1emx 0 0;
+  font-size:1.1em;
   line-height:1.65;
   color:var(--wpf-muted);
 }
-.wpf-progress-wrap{padding:0 34px 28px}
+.wpf-progress-wrap{padding:0 3em 2.5em}
 .wpf-progress-meta{
   display:flex;
   justify-content:space-between;
-  gap:20px;
-  margin-bottom:8px;
+  gap:2.5em;
+  margin-bottom:.9em;
   color:var(--wpf-muted);
-  font-size:13px;
+  font-size:1em;
 }
 .wpf-progress{
-  height:8px;
+  height:.8em;
   background:#e7e1d8;
   border-radius:999px;
   overflow:hidden;
@@ -69,27 +69,27 @@
   border-radius:999px;
   transition:width .25s ease;
 }
-.wpf-body{background:var(--wpf-card);padding:34px}
+.wpf-body{background:var(--wpf-card);padding:3em}
 .wpf-step{display:none}
 .wpf-step.is-active{display:block;animation:wpfFade .22s ease}
 @keyframes wpfFade{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none}}
 .wpf-category{
-  margin:0 0 8px;
-  font-size:13px;
+  margin:0 0 .8em;
+  font-size:1em;
   text-transform:uppercase;
   letter-spacing:.12em;
   color:var(--wpf-accent);
   font-weight:700;
 }
 .wpf-question{
-  margin:0 0 10px;
+  margin:0 0 .9em;
   max-width:760px;
   font-size:clamp(24px,3.5vw,36px);
   line-height:1.15;
   letter-spacing:-.02em;
 }
 .wpf-help{
-  margin:0 0 24px;
+  margin:0 0 2em;
   color:var(--wpf-muted);
   line-height:1.55;
 }
@@ -98,18 +98,18 @@
   width:100%;
   min-height:54px;
   border:1px solid var(--wpf-line);
-  border-radius:12px;
+  border-radius:2px;
   background:#fff;
   color:var(--wpf-ink);
   font:inherit;
-  padding:13px 14px;
+  padding:1em 1em;
   outline:none;
 }
 .wpf-select:focus,.wpf-field:focus{border-color:var(--wpf-accent);box-shadow:0 0 0 3px var(--wpf-accent-soft)}
 .wpf-options{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  gap:1em;
 }
 .wpf-option{
   position:relative;
@@ -118,8 +118,8 @@
   gap:12px;
   min-height:74px;
   border:1px solid var(--wpf-line);
-  border-radius:14px;
-  padding:15px;
+  border-radius:1px;
+  padding:1.1em;
   cursor:pointer;
   transition:.18s ease;
   background:#fff;
