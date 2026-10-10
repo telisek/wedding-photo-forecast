@@ -4,9 +4,9 @@
   --wpf-line:#ded8cf;
   --wpf-bg:#faf8f4;
   --wpf-card:#ffffff;
-  --wpf-accent:#6f5948;
+  --wpf-accent:#376141;
   --wpf-accent-soft:#eee7df;
-  --wpf-radius:18px;
+  --wpf-radius:0px;
   --wpf-shadow:0 14px 40px rgba(36,31,26,.08);
 }
 #wpf-app,*[data-wpf-quiz]{box-sizing:border-box}
