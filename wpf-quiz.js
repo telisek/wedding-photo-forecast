@@ -242,9 +242,6 @@
             <p id="wpf-insight"></p>
           </section>
           <section class="wpf-email">
-            <p class="wpf-eyebrow">Your Personalized Inspiration</p>
-            <h3>Now, See Your Forecast Come to Life.</h3>
-            <p>Explore more wedding inspiration from Aaron Watson Photography. Leave your email to stay in touch about photography inspiration and planning resources. Personalized image delivery is being prepared and is not yet automated.</p>
             <div id="fd-form-6ac966f38b2745cb6a785c8e"></div>
             <div class="wpf-form-status" id="wpf-form-status"></div>
           </section>
