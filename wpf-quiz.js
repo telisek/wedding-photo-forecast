@@ -25,7 +25,8 @@
   ];
 
   const months = Object.keys(D.seasonResults);
-  const IMAGES = Array.isArray(window.WPF_IMAGES) ? window.WPF_IMAGES : [];
+  const IMAGE_MAP = window.WPF_IMAGE_MAP || {};
+  const IMAGE_BASE = (window.WPF_IMAGE_BASE || "./aw-images/").replace(/\/?$/, "/");
 
   const priorityDisplay = {
     "Immediate family (Parents, Grandparents, Siblings)":"Immediate family (Parents, Grandparents, Siblings)",
@@ -61,25 +62,21 @@
     })[c]);
   }
 
-  function matches(image, field, value){
-    return Array.isArray(image[field]) && image[field].some(x=>String(x).toLowerCase()===String(value).toLowerCase());
-  }
-  function imageScore(image, criteria){
-    let score=0;
-    if(criteria.venue && matches(image,"venues",criteria.venue)) score+=16;
-    if(criteria.vibe && matches(image,"vibes",criteria.vibe)) score+=6;
-    if(criteria.month && matches(image,"months",criteria.month)) score+=5;
-    if(criteria.personality && matches(image,"personalities",criteria.personality)) score+=4;
-    if(criteria.style && matches(image,"styles",criteria.style)) score+=4;
-    if(criteria.priority && matches(image,"priorities",criteria.priority)) score+=8;
-    if(criteria.role && matches(image,"roles",criteria.role)) score+=3;
-    return score;
-  }
-  function findImage(criteria,used=new Set()){
-    const ranked=IMAGES.filter(im=>im && typeof im.src==="string" && /^https:\/\//.test(im.src) && !used.has(im.src))
-      .map(im=>({im,score:imageScore(im,criteria)}))
-      .filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
-    return ranked.length ? ranked[0].im : null;
+  // Deterministic lookup: each image has exactly one role.
+  // Venue *vibe* is used, never an unverified photograph of the chosen venue.
+  function findImage(criteria){
+    let filename;
+    if(criteria.role === "cover") filename=IMAGE_MAP.cover;
+    else if(criteria.role === "hero" || criteria.role === "venue") filename=IMAGE_MAP.venues?.[criteria.vibe];
+    else if(criteria.role === "personality") filename=IMAGE_MAP.personalities?.[criteria.personality];
+    else if(criteria.role === "style") filename=IMAGE_MAP.styles?.[criteria.style];
+    else if(criteria.role === "season"){
+      const monthToSeason={January:"Winter",February:"Winter",March:"Spring",April:"Spring",May:"Spring",June:"Summer",July:"Summer",August:"Summer",September:"Fall",October:"Fall",November:"Fall",December:"Winter"};
+      filename=IMAGE_MAP.seasons?.[monthToSeason[criteria.month]];
+    }
+    else if(criteria.role === "priority") filename=IMAGE_MAP.priorities?.[criteria.priority];
+    if(!filename) return null;
+    return {src:IMAGE_BASE+encodeURIComponent(filename),alt:filename.replace(/\.webp$/i,"").replace(/-/g," ")};
   }
   function imageMarkup(image,caption,kind=""){
     if(!image) return `<div class="wpf-photo-placeholder ${kind}" role="img" aria-label="Photograph awaiting curation"><span>AWP / ${esc(caption)}</span><small>Photograph to be added</small></div>`;
@@ -219,6 +216,7 @@
               <h3 id="wpf-venue-title"></h3>
               <p id="wpf-venue-description"></p>
               <div class="wpf-photo-grid" id="wpf-venue-gallery"></div>
+              <p class="wpf-venue-inspiration-note">Images illustrate your wedding aesthetic and venue vibe; they may be photographed at different venues.</p>
             </article>
 
             <article class="wpf-card">
@@ -366,12 +364,9 @@
   }
 
   function curatedGallery(criteriaList){
-    const used=new Set();
-    return criteriaList.map((criteria,i)=>{
-      const photo=findImage(criteria,used);
-      if(photo) used.add(photo.src);
-      return imageMarkup(photo,criteria.priority || criteria.role || `Wedding inspiration ${i+1}`);
-    }).join("");
+    return criteriaList.map((criteria,i)=>
+      imageMarkup(findImage(criteria),criteria.priority || criteria.role || `Wedding inspiration ${i+1}`)
+    ).join("");
   }
   function planningInsight(r){
     const sunset=r.season.sunset;
@@ -392,8 +387,7 @@
     $("#wpf-venue-title").textContent = `${r.venueVibe} at ${r.venueName}`;
     $("#wpf-venue-description").textContent = r.venueDescription;
     $("#wpf-venue-gallery").innerHTML = curatedGallery([
-      {venue:r.venueName,vibe:r.venueVibe,role:"venue"},
-      {vibe:r.venueVibe,personality:r.coupleStyle,role:"personality"}
+      {personality:r.coupleStyle,role:"personality"}
     ]);
 
     $("#wpf-season-title").textContent = `${r.month} in Charlottesville`;
