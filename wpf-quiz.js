@@ -192,8 +192,6 @@
           </div>
 
           <section class="wpf-email">
-            <h3>Want inspiration tailored to your forecast?</h3>
-            <p>Enter your email below to receive personalized image inspiration that matches your venue vibe, season, and photo personality.</p>
             <div id="fd-form-6ac966f38b2745cb6a785c8e"></div>
             <div class="wpf-form-status" id="wpf-form-status"></div>
           </section>
