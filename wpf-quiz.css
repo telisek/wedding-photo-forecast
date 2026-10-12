@@ -42,6 +42,7 @@
   font-size:clamp(30px,5vw,54px);
   line-height:1.03;
   letter-spacing:-.035em;
+  text-transform: uppercase;
 }
 .wpf-intro{
   max-width:720px;
@@ -227,7 +228,7 @@
   margin:16px 0 18px;
 }
 .wpf-stat{
-  background:var(--wpf-bg);
+  background:var(--wpf-accent-soft);
   border-radius:12px;
   padding:12px;
 }
@@ -282,16 +283,16 @@
 #wpf-app .wpf-results-sub{max-width:660px;margin:auto}
 #wpf-app .wpf-results-hero .wpf-chips{justify-content:center}
 #wpf-app .wpf-results-art{width:100%;max-width:760px;margin:22px auto 0}
-#wpf-app .wpf-results-art .wpf-photo,#wpf-app .wpf-results-art .wpf-photo-placeholder{height:280px;aspect-ratio:16/7}
+#wpf-app .wpf-results-art .wpf-photo,#wpf-app .wpf-results-art .wpf-photo-placeholder{height:400px;aspect-ratio:16/7}
 #wpf-app .wpf-result-grid{gap:0;padding:0 34px;background:#fff}
 #wpf-app .wpf-card{border:0;border-bottom:1px solid #e7dfd6;border-radius:0;padding:36px 0 42px}
-#wpf-app .wpf-card h3{font-family:inherit;font-weight:400;font-size:clamp(26px,3vw,36px)}
+#wpf-app .wpf-card h3{font-weight:300;font-size:clamp(26px,3vw,36px)}
 #wpf-app .wpf-card p{max-width:790px}
 #wpf-app .wpf-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:25px}
 #wpf-app .wpf-photo-grid:has(> :only-child){grid-template-columns:1fr}
 #wpf-app .wpf-photo-grid:has(> :only-child) > *{aspect-ratio:16/7}
 #wpf-app .wpf-three-images{grid-template-columns:repeat(3,minmax(0,1fr))}
-#wpf-app .wpf-expert{background:#e5e4de;padding:34px;margin:28px 34px 10px;border-left:3px solid #376141}
+#wpf-app .wpf-expert{padding:34px;margin:28px 34px 10px;border-left:3px solid #376141}
 #wpf-app .wpf-expert h3{font-size:26px;font-weight:400;margin:10px 0}
 #wpf-app .wpf-expert p:last-child{line-height:1.7;color:#5e5349;margin:0}
 #wpf-app .wpf-email{background:#376141;text-align:center;padding:42px}
