@@ -25,6 +25,7 @@
   ];
 
   const months = Object.keys(D.seasonResults);
+  const IMAGES = Array.isArray(window.WPF_IMAGES) ? window.WPF_IMAGES : [];
 
   const priorityDisplay = {
     "Immediate family (Parents, Grandparents, Siblings)":"Immediate family (Parents, Grandparents, Siblings)",
@@ -41,6 +42,7 @@
   };
 
   const state = {
+    started:false,
     step:0,
     venue:"",
     coupleStyle:"",
@@ -59,11 +61,41 @@
     })[c]);
   }
 
+  function matches(image, field, value){
+    return Array.isArray(image[field]) && image[field].some(x=>String(x).toLowerCase()===String(value).toLowerCase());
+  }
+  function imageScore(image, criteria){
+    let score=0;
+    if(criteria.venue && matches(image,"venues",criteria.venue)) score+=16;
+    if(criteria.vibe && matches(image,"vibes",criteria.vibe)) score+=6;
+    if(criteria.month && matches(image,"months",criteria.month)) score+=5;
+    if(criteria.personality && matches(image,"personalities",criteria.personality)) score+=4;
+    if(criteria.style && matches(image,"styles",criteria.style)) score+=4;
+    if(criteria.priority && matches(image,"priorities",criteria.priority)) score+=8;
+    if(criteria.role && matches(image,"roles",criteria.role)) score+=3;
+    return score;
+  }
+  function findImage(criteria,used=new Set()){
+    const ranked=IMAGES.filter(im=>im && typeof im.src==="string" && /^https:\/\//.test(im.src) && !used.has(im.src))
+      .map(im=>({im,score:imageScore(im,criteria)}))
+      .filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+    return ranked.length ? ranked[0].im : null;
+  }
+  function imageMarkup(image,caption,kind=""){
+    if(!image) return `<div class="wpf-photo-placeholder ${kind}" role="img" aria-label="Photograph awaiting curation"><span>AWP / ${esc(caption)}</span><small>Photograph to be added</small></div>`;
+    return `<figure class="wpf-photo ${kind}"><img src="${esc(image.src)}" alt="${esc(image.alt || caption)}" loading="lazy"><figcaption>${esc(caption)}</figcaption></figure>`;
+  }
+  function inspirationCard(criteria,label){
+    const image=findImage(criteria);
+    return `<div class="wpf-inspiration">${imageMarkup(image,label,"wpf-option-photo")}</div>`;
+  }
   function optionRadio(name, value, label, description){
     return `
       <label class="wpf-option">
         <input type="radio" name="${esc(name)}" value="${esc(value)}">
-        <div><strong>${esc(label)}</strong>${description ? `<span>${esc(description)}</span>` : ""}</div>
+        ${name === "wpf-couple-style" ? inspirationCard({personality:value,role:"personality"},value) : ""}
+        ${name === "wpf-photo-style" ? inspirationCard({style:value,role:"style"},value) : ""}
+        <div class="wpf-option-copy"><strong>${esc(label)}</strong>${description ? `<span>${esc(description)}</span>` : ""}</div>
       </label>`;
   }
 
@@ -84,9 +116,20 @@
   ROOT.innerHTML = `
     <div id="wpf-app">
       <div class="wpf-shell">
-        <section id="wpf-quiz-panel">
+        <section id="wpf-intro" class="wpf-intro-cover">
+          <div class="wpf-cover-copy">
+            <p class="wpf-eyebrow">Aaron Watson Photography Presents</p>
+            <h1 class="wpf-title">Your Wedding Photo Forecast</h1>
+            <p class="wpf-cover-subtitle">Your wedding day is one of a kind. Your photographs should be, too.</p>
+            <p class="wpf-intro">Discover how your venue, wedding season, and personal style come together to shape the photographs you'll treasure for a lifetime.</p>
+            <button class="wpf-btn wpf-btn-primary" type="button" id="wpf-start">Discover My Forecast <span aria-hidden="true">→</span></button>
+            <p class="wpf-cover-foot">Five questions · Personalized results · No email required to see your forecast</p>
+          </div>
+          <div id="wpf-cover-art" class="wpf-cover-art"></div>
+        </section>
+        <section id="wpf-quiz-panel" hidden>
           <header class="wpf-header">
-            <p class="wpf-eyebrow">Interactive Wedding Quiz</p>
+            <p class="wpf-eyebrow">A Personal Wedding Photography Guide</p>
             <h1 class="wpf-title">Your Wedding Photo Forecast</h1>
             <p class="wpf-intro">Tell us a little about your venue, season, and the photographs you care about most. Your forecast combines all three into a personalized wedding photography profile.</p>
           </header>
@@ -114,7 +157,7 @@
             <section class="wpf-step" data-step="1">
               <p class="wpf-category">Venue Vibes</p>
               <h2 class="wpf-question">Our wedding couple personality would be…</h2>
-              <div class="wpf-options">
+              <div class="wpf-options wpf-illustrated-options">
                 ${coupleStyles.map(x=>optionRadio("wpf-couple-style",x,x)).join("")}
               </div>
               <div class="wpf-error" aria-live="polite"></div>
@@ -133,7 +176,7 @@
             <section class="wpf-step" data-step="3">
               <p class="wpf-category">Photo Personality</p>
               <h2 class="wpf-question">What type of wedding photography style do you most appreciate?</h2>
-              <div class="wpf-options">
+              <div class="wpf-options wpf-illustrated-options">
                 ${photoStyles.map(x=>optionRadio("wpf-photo-style",x[0],x[0],x[1])).join("")}
               </div>
               <div class="wpf-error" aria-live="polite"></div>
@@ -164,6 +207,7 @@
         <section class="wpf-results" id="wpf-results" aria-live="polite">
           <div class="wpf-results-hero">
             <p class="wpf-eyebrow">Your Overall Wedding Photo Forecast</p>
+            <div id="wpf-results-art" class="wpf-results-art"></div>
             <h2 class="wpf-results-title" id="wpf-composite"></h2>
             <p class="wpf-results-sub">Your forecast combines the visual character of your venue, the seasonal conditions surrounding your date, and the moments you most want your photographs to preserve.</p>
             <div class="wpf-chips" id="wpf-composite-chips"></div>
@@ -171,27 +215,38 @@
 
           <div class="wpf-result-grid">
             <article class="wpf-card">
-              <p class="wpf-card-label">Venue Vibes</p>
+              <p class="wpf-card-label">01 / Your Venue Vibes</p>
               <h3 id="wpf-venue-title"></h3>
               <p id="wpf-venue-description"></p>
+              <div class="wpf-photo-grid" id="wpf-venue-gallery"></div>
             </article>
 
             <article class="wpf-card">
-              <p class="wpf-card-label">Seasonal Forecast</p>
+              <p class="wpf-card-label">02 / Your Seasonal Forecast</p>
               <h3 id="wpf-season-title"></h3>
               <div class="wpf-stats" id="wpf-season-stats"></div>
               <p id="wpf-season-description"></p>
+              <div class="wpf-photo-grid" id="wpf-season-gallery"></div>
             </article>
 
             <article class="wpf-card">
-              <p class="wpf-card-label">Photo Personality</p>
+              <p class="wpf-card-label">03 / Your Photo Personality</p>
               <h3 id="wpf-photo-title"></h3>
               <div class="wpf-chips" id="wpf-photo-priorities"></div>
               <p id="wpf-photo-description" style="margin-top:14px"></p>
+              <div class="wpf-photo-grid wpf-three-images" id="wpf-priority-gallery"></div>
             </article>
           </div>
 
+          <section class="wpf-expert" aria-label="Photography planning insight">
+            <p class="wpf-card-label">An Insight From Aaron Watson Photography</p>
+            <h3>The details behind beautiful photographs</h3>
+            <p id="wpf-insight"></p>
+          </section>
           <section class="wpf-email">
+            <p class="wpf-eyebrow">Your Personalized Inspiration</p>
+            <h3>Now, See Your Forecast Come to Life.</h3>
+            <p>Explore more wedding inspiration from Aaron Watson Photography. Leave your email to stay in touch about photography inspiration and planning resources. Personalized image delivery is being prepared and is not yet automated.</p>
             <div id="fd-form-6ac966f38b2745cb6a785c8e"></div>
             <div class="wpf-form-status" id="wpf-form-status"></div>
           </section>
@@ -205,6 +260,16 @@
 
   const $ = sel => ROOT.querySelector(sel);
   const $$ = sel => [...ROOT.querySelectorAll(sel)];
+  function fillStaticImages(){
+    $("#wpf-cover-art").innerHTML = imageMarkup(findImage({role:"cover"}) || findImage({role:"hero"}),"Wedding Photo Forecast","wpf-photo-tall");
+  }
+  fillStaticImages();
+  $("#wpf-start").addEventListener("click",()=>{
+    state.started=true;
+    $("#wpf-intro").hidden=true;
+    $("#wpf-quiz-panel").hidden=false;
+    $("#wpf-venue").focus({preventScroll:true});
+  });
 
   function getStepEl(){ return $(`.wpf-step[data-step="${state.step}"]`); }
   function setError(msg=""){
@@ -300,14 +365,36 @@
     ROOT.dataset.compositeForecast = r.compositeLabel;
   }
 
+  function curatedGallery(criteriaList){
+    const used=new Set();
+    return criteriaList.map((criteria,i)=>{
+      const photo=findImage(criteria,used);
+      if(photo) used.add(photo.src);
+      return imageMarkup(photo,criteria.priority || criteria.role || `Wedding inspiration ${i+1}`);
+    }).join("");
+  }
+  function planningInsight(r){
+    const sunset=r.season.sunset;
+    const rainy=r.season.rainChance;
+    const p=r.priorities.map(x=>x.toLowerCase());
+    const timing=`With an approximate ${r.month} sunset of ${sunset}, build your portrait timeline around available natural light rather than the reception start time.`;
+    const weather=`A seasonal daily rain estimate of ${rainy}% makes a comfortable indoor portrait backup worth discussing with your venue.`;
+    const moments=p.includes("immediate family (parents, grandparents, siblings)") ? "Allow a dedicated window for immediate-family photographs so those groupings never feel rushed." : p.includes("ceremony emotion") ? "Allow space around the ceremony so meaningful reactions can be documented as they happen." : "Build a photography timeline that protects the moments you've identified as most meaningful.";
+    return `${timing} ${weather} ${moments} These are planning considerations, not a prediction for your specific wedding date.`;
+  }
   function renderResult(r){
-    $("#wpf-composite").textContent = r.compositeLabel;
+    $("#wpf-composite").textContent = `${r.venueVibe} / ${r.month} / ${r.photoTitle}`;
+    $("#wpf-results-art").innerHTML = curatedGallery([{venue:r.venueName,vibe:r.venueVibe,personality:r.coupleStyle,month:r.month,role:"hero"}]);
     $("#wpf-composite-chips").innerHTML = [
       r.venueName, r.coupleStyle, r.photoStyle
     ].map(x=>`<span class="wpf-chip">${esc(x)}</span>`).join("");
 
     $("#wpf-venue-title").textContent = `${r.venueVibe} at ${r.venueName}`;
     $("#wpf-venue-description").textContent = r.venueDescription;
+    $("#wpf-venue-gallery").innerHTML = curatedGallery([
+      {venue:r.venueName,vibe:r.venueVibe,role:"venue"},
+      {vibe:r.venueVibe,personality:r.coupleStyle,role:"personality"}
+    ]);
 
     $("#wpf-season-title").textContent = `${r.month} in Charlottesville`;
     $("#wpf-season-stats").innerHTML = `
@@ -315,12 +402,15 @@
       <div class="wpf-stat"><strong>${esc(r.season.rainChance)}%</strong><span>Est. rain chance</span></div>
       <div class="wpf-stat"><strong>${esc(r.season.sunset)}</strong><span>Approx. sunset</span></div>`;
     $("#wpf-season-description").textContent = r.season.description;
+    $("#wpf-season-gallery").innerHTML = curatedGallery([{month:r.month,role:"season"}]);
 
     $("#wpf-photo-title").textContent = r.photoTitle;
     $("#wpf-photo-priorities").innerHTML = r.priorities.map(x=>`<span class="wpf-chip">${esc(x)}</span>`).join("");
     $("#wpf-photo-description").textContent = r.photoDescription;
+    $("#wpf-priority-gallery").innerHTML = curatedGallery(r.priorities.map(priority=>({priority,style:r.photoStyle,role:"priority"})));
+    $("#wpf-insight").textContent = planningInsight(r);
 
-    $("#wpf-quiz-panel").style.display = "none";
+    $("#wpf-quiz-panel").hidden = true;
     $("#wpf-results").classList.add("is-visible");
     saveResult(r);
     initFlodesk();
@@ -354,6 +444,7 @@
 
   function resetQuiz(){
     state.step=0;
+    state.started=false;
     state.venue="";
     state.coupleStyle="";
     state.month="";
@@ -369,7 +460,8 @@
     $("#wpf-priority-count").textContent="0 of 3 selected";
     $("#wpf-other-wrap").classList.remove("is-visible");
     $("#wpf-results").classList.remove("is-visible");
-    $("#wpf-quiz-panel").style.display="";
+    $("#wpf-quiz-panel").hidden=true;
+    $("#wpf-intro").hidden=false;
     updateStep();
     ROOT.scrollIntoView({behavior:"smooth",block:"start"});
   }
