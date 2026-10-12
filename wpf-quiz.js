@@ -21,8 +21,7 @@
   const photoStyles = [
     ["Editorial","Polished, magazine-worthy photographs with artistic posing, thoughtful composition, and a high-fashion feel."],
     ["Documentary","Authentic storytelling that captures your wedding day naturally as it unfolds, without directing or staging moments."],
-    ["Candid","Spontaneous, unposed photographs capturing genuine laughter, emotions, and the little moments in between."],
-    ["Film-inspired","Soft, romantic imagery with natural tones, subtle grain, and a nostalgic, timeless feel reminiscent of classic film photography."]
+    ["Candid","Spontaneous, unposed photographs capturing genuine laughter, emotions, and the little moments in between."]
   ];
 
   const months = Object.keys(D.seasonResults);
