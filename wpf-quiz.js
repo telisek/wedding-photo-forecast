@@ -203,8 +203,8 @@
 
         <section class="wpf-results" id="wpf-results" aria-live="polite">
           <div class="wpf-results-hero">
-            <p class="wpf-eyebrow">Your Overall Wedding Photo Forecast</p>
             <div id="wpf-results-art" class="wpf-results-art"></div>
+            <p class="wpf-eyebrow">Your Overall Wedding Photo Forecast</p>
             <h2 class="wpf-results-title" id="wpf-composite"></h2>
             <p class="wpf-results-sub">Your forecast combines the visual character of your venue, the seasonal conditions surrounding your date, and the moments you most want your photographs to preserve.</p>
             <div class="wpf-chips" id="wpf-composite-chips"></div>
