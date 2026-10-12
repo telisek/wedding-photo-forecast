@@ -229,7 +229,7 @@
 }
 .wpf-stat{
   background:var(--wpf-accent-soft);
-  border-radius:12px;
+  border-radius:3px;
   padding:12px;
 }
 .wpf-stat strong{display:block;font-size:18px}
