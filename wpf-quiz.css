@@ -325,6 +325,6 @@
 #wpf-app .wpf-photo figcaption {display:none;}
 #wpf-app .wpf-card h3, #wpf-app .wpf-expert h3,
 #wpf-app .wpf-email h3, #wpf-app .wpf-cover-subtitle {font-family:inherit;}
-#wpf-app .wpf-expert {background:#e0ded2;}
+#wpf-app .wpf-expert {background:var(--wpf-accent-soft)}
 #wpf-app .wpf-email {background:#376141;border-radius:0;}
 @media(max-width:700px) {#wpf-app .wpf-results-art .wpf-photo {height:200px;}}
