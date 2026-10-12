@@ -126,7 +126,7 @@
 }
 .wpf-option:hover{transform:translateY(-1px);border-color:#bfb5a9}
 .wpf-option input{margin-top:4px;accent-color:var(--wpf-accent)}
-.wpf-option:has(input:checked){border-color:var(--wpf-accent);background:var(--wpf-accent-soft)}
+.wpf-option:has(input:checked){border-color:var(--wpf-accent);background:var(--wpf-bg)}
 .wpf-option strong{display:block;margin-bottom:3px}
 .wpf-option span{display:block;color:var(--wpf-muted);font-size:14px;line-height:1.45}
 .wpf-priority-count{
@@ -156,12 +156,13 @@
 .wpf-btn{
   appearance:none;
   border:0;
-  border-radius:999px;
+  border-radius:1px;
   min-height:48px;
   padding:12px 20px;
   font:inherit;
   font-weight:700;
   cursor:pointer;
+  background:#376141;
 }
 .wpf-btn-primary{background:var(--wpf-ink);color:white}
 .wpf-btn-secondary{background:transparent;color:var(--wpf-ink);border:1px solid var(--wpf-line)}
@@ -229,7 +230,7 @@
   margin:18px 34px 34px;
   padding:28px;
   border-radius:var(--wpf-radius);
-  background:var(--wpf-ink);
+  background:var(--wpf-accent);
   color:white;
 }
 .wpf-email h3{margin:0 0 8px;font-size:26px}
