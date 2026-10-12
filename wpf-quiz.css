@@ -2,11 +2,11 @@
   --wpf-ink:#1f1d1a;
   --wpf-muted:#6f6a63;
   --wpf-line:#ded8cf;
-  --wpf-bg:#faf8f4;
+  --wpf-bg:#ffffff;
   --wpf-card:#ffffff;
-  --wpf-accent:#6f5948;
-  --wpf-accent-soft:#eee7df;
-  --wpf-radius:18px;
+  --wpf-accent:#376141;
+  --wpf-accent-soft:#fcfcf9;
+  --wpf-radius:0;
   --wpf-shadow:0 14px 40px rgba(36,31,26,.08);
 }
 #wpf-app,*[data-wpf-quiz]{box-sizing:border-box}
@@ -247,10 +247,10 @@
 
 /* Editorial v3 — scoped to the quiz */
 #wpf-app [hidden]{display:none!important}
-#wpf-app .wpf-shell{background:#f6f2ed;border-color:#e7dfd6;border-radius:0}
-#wpf-app .wpf-intro-cover{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:#f5f0e9}
+#wpf-app .wpf-shell{background:#ffffff;border-color:#e7dfd6;border-radius:0}
+#wpf-app .wpf-intro-cover{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:#ffffff}
 #wpf-app .wpf-cover-copy{padding:clamp(30px,6vw,76px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
-#wpf-app .wpf-cover-subtitle{font-family:Georgia,serif;font-size:clamp(22px,3vw,33px);line-height:1.24;color:#6f5948;margin:20px 0 0}
+#wpf-app .wpf-cover-subtitle{font-family:inherit;font-size:clamp(22px,3vw,33px);line-height:1.24;color:var(--wpf-accent);margin:20px 0 0}
 #wpf-app .wpf-cover-copy .wpf-btn{margin-top:26px}
 #wpf-app .wpf-cover-foot{font-size:12px;letter-spacing:.02em;color:#786f64;margin-top:20px}
 #wpf-app .wpf-cover-art{min-height:440px}
@@ -260,34 +260,34 @@
 #wpf-app .wpf-photo figcaption{position:absolute;bottom:0;left:0;right:0;padding:22px 16px 12px;background:linear-gradient(transparent,rgba(0,0,0,.32));color:white;font-size:11px}
 #wpf-app .wpf-cover-art .wpf-photo,#wpf-app .wpf-cover-art .wpf-photo-placeholder{aspect-ratio:auto;height:100%}
 #wpf-app .wpf-photo-placeholder{background:linear-gradient(140deg,#ded2c5,#c6b19d 48%,#eee7de);min-height:130px;aspect-ratio:4/5;display:flex;justify-content:flex-end;flex-direction:column;padding:20px;gap:5px;color:#4d4035}
-#wpf-app .wpf-photo-placeholder span{font-family:Georgia,serif;font-size:19px;line-height:1.15}
+#wpf-app .wpf-photo-placeholder span{font-family:inherit;font-size:19px;line-height:1.15}
 #wpf-app .wpf-photo-placeholder small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
 #wpf-app .wpf-option{overflow:hidden}
 #wpf-app .wpf-illustrated-options .wpf-option{display:flex;flex-direction:column;padding:0;gap:0}
 #wpf-app .wpf-illustrated-options .wpf-option>input{position:absolute;z-index:2;top:10px;left:10px;appearance:none;width:21px;height:21px;border:2px solid white;background:rgba(45,37,31,.6);border-radius:50%;margin:0}
-#wpf-app .wpf-illustrated-options .wpf-option:has(input:checked)>input{background:#6f5948;box-shadow:inset 0 0 0 4px #fff}
+#wpf-app .wpf-illustrated-options .wpf-option:has(input:checked)>input{background:var(--wpf-accent);box-shadow:inset 0 0 0 4px #fff}
 #wpf-app .wpf-illustrated-options .wpf-inspiration{width:100%}
 #wpf-app .wpf-illustrated-options .wpf-option-photo{width:100%;height:155px;aspect-ratio:3/1}
 #wpf-app .wpf-illustrated-options .wpf-option-copy{padding:17px;width:100%}
 #wpf-app .wpf-results-hero{text-align:center;padding-top:42px}
-#wpf-app .wpf-results-title{font-family:Georgia,serif;font-size:clamp(32px,4.3vw,52px);font-weight:400;margin:22px auto 12px}
+#wpf-app .wpf-results-title{font-family:inherit;font-size:clamp(32px,4.3vw,52px);font-weight:400;margin:22px auto 12px}
 #wpf-app .wpf-results-sub{max-width:660px;margin:auto}
 #wpf-app .wpf-results-hero .wpf-chips{justify-content:center}
 #wpf-app .wpf-results-art{width:100%;max-width:760px;margin:22px auto 0}
 #wpf-app .wpf-results-art .wpf-photo,#wpf-app .wpf-results-art .wpf-photo-placeholder{height:280px;aspect-ratio:16/7}
 #wpf-app .wpf-result-grid{gap:0;padding:0 34px;background:#fff}
 #wpf-app .wpf-card{border:0;border-bottom:1px solid #e7dfd6;border-radius:0;padding:36px 0 42px}
-#wpf-app .wpf-card h3{font-family:Georgia,serif;font-weight:400;font-size:clamp(26px,3vw,36px)}
+#wpf-app .wpf-card h3{font-family:inherit;font-weight:400;font-size:clamp(26px,3vw,36px)}
 #wpf-app .wpf-card p{max-width:790px}
 #wpf-app .wpf-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:25px}
 #wpf-app .wpf-photo-grid:has(> :only-child){grid-template-columns:1fr}
 #wpf-app .wpf-photo-grid:has(> :only-child) > *{aspect-ratio:16/7}
 #wpf-app .wpf-three-images{grid-template-columns:repeat(3,minmax(0,1fr))}
-#wpf-app .wpf-expert{background:#eee6dc;padding:34px;margin:28px 34px 10px;border-left:3px solid #79634f}
-#wpf-app .wpf-expert h3{font-family:Georgia,serif;font-size:26px;font-weight:400;margin:10px 0}
+#wpf-app .wpf-expert{background:#e0ded2;padding:34px;margin:28px 34px 10px;border-left:3px solid #79634f}
+#wpf-app .wpf-expert h3{font-family:inherit;font-size:26px;font-weight:400;margin:10px 0}
 #wpf-app .wpf-expert p:last-child{line-height:1.7;color:#5e5349;margin:0}
-#wpf-app .wpf-email{background:#302a26;text-align:center;padding:42px}
-#wpf-app .wpf-email h3{font-family:Georgia,serif;font-size:clamp(28px,3.5vw,40px);font-weight:400}
+#wpf-app .wpf-email{background:#376141;text-align:center;padding:42px}
+#wpf-app .wpf-email h3{font-family:inherit;font-size:clamp(28px,3.5vw,40px);font-weight:400}
 #wpf-app .wpf-email > p{max-width:620px;margin:8px auto 22px}
 #wpf-app .wpf-email .wpf-eyebrow{color:#d4bda3}
 @media(max-width:700px){#wpf-app .wpf-intro-cover{grid-template-columns:1fr}#wpf-app .wpf-cover-art{min-height:250px;max-height:340px}#wpf-app .wpf-illustrated-options{grid-template-columns:1fr}#wpf-app .wpf-photo-grid,#wpf-app .wpf-three-images{grid-template-columns:repeat(2,minmax(0,1fr))}#wpf-app .wpf-result-grid{padding-left:20px;padding-right:20px}#wpf-app .wpf-expert{margin-left:20px;margin-right:20px}#wpf-app .wpf-results-art .wpf-photo-placeholder{height:200px}#wpf-app .wpf-email{padding:26px 18px}}
@@ -296,3 +296,29 @@
 #wpf-app .wpf-venue-inspiration-note{font-size:12px;color:var(--wpf-muted);margin-top:12px}
 #wpf-app .wpf-photo-grid:has(> :only-child) > .wpf-photo{aspect-ratio:16/9;height:auto}
 @media(max-width:700px){#wpf-app .wpf-three-images{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}#wpf-app .wpf-three-images figcaption{font-size:10px;padding:15px 6px 7px}}
+
+/* Design update v6 — square corners, white canvas, brand green */
+#wpf-app, #wpf-app .wpf-shell, #wpf-app .wpf-intro-cover,
+#wpf-app .wpf-header, #wpf-app .wpf-body, #wpf-app .wpf-results,
+#wpf-app .wpf-results-hero, #wpf-app .wpf-result-grid,
+#wpf-app .wpf-card, #wpf-app .wpf-stat {background-color:#ffffff;}
+#wpf-app .wpf-option:has(input:checked) {background-color:var(--wpf-accent-soft);}
+#wpf-app .wpf-option span {font-weight:300;}
+#wpf-app .wpf-shell, #wpf-app .wpf-select, #wpf-app .wpf-field,
+#wpf-app .wpf-card, #wpf-app .wpf-stat, #wpf-app .wpf-btn,
+#wpf-app .wpf-chip, #wpf-app .wpf-email, #wpf-app .wpf-expert,
+#wpf-app .wpf-photo, #wpf-app .wpf-photo-placeholder,
+#wpf-app .wpf-priority-count, #wpf-app .wpf-progress,
+#wpf-app .wpf-progress-bar {border-radius:0;}
+#wpf-app .wpf-option {border-radius:1px;}
+#wpf-app .wpf-results-art {width:100%; max-width:none; margin:22px 0 0; overflow:hidden;}
+#wpf-app .wpf-results-art .wpf-photo,
+#wpf-app .wpf-results-art .wpf-photo-placeholder {width:100%;height:280px;aspect-ratio:auto;}
+#wpf-app .wpf-results-art .wpf-photo img {display:block;width:100%;height:100%;object-fit:cover;}
+#wpf-app .wpf-photo figcaption {display:none;}
+#wpf-app .wpf-title, #wpf-app .wpf-question, #wpf-app .wpf-results-title,
+#wpf-app .wpf-card h3, #wpf-app .wpf-expert h3,
+#wpf-app .wpf-email h3, #wpf-app .wpf-cover-subtitle {font-family:inherit;}
+#wpf-app .wpf-expert {background:#e0ded2;}
+#wpf-app .wpf-email {background:#376141;border-radius:0;}
+@media(max-width:700px) {#wpf-app .wpf-results-art .wpf-photo {height:200px;}}

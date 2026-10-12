@@ -80,7 +80,7 @@
   }
   function imageMarkup(image,caption,kind=""){
     if(!image) return `<div class="wpf-photo-placeholder ${kind}" role="img" aria-label="Photograph awaiting curation"><span>AWP / ${esc(caption)}</span><small>Photograph to be added</small></div>`;
-    return `<figure class="wpf-photo ${kind}"><img src="${esc(image.src)}" alt="${esc(image.alt || caption)}" loading="lazy"><figcaption>${esc(caption)}</figcaption></figure>`;
+    return `<figure class="wpf-photo ${kind}"><img src="${esc(image.src)}" alt="${esc(image.alt || caption)}" loading="lazy"></figure>`;
   }
   function inspirationCard(criteria,label){
     const image=findImage(criteria);
