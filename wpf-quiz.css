@@ -5,7 +5,7 @@
   --wpf-bg:#ffffff;
   --wpf-card:#ffffff;
   --wpf-accent:#376141;
-  --wpf-accent-soft:#fcfcf9;
+  --wpf-accent-soft:#f7f7ef;
   --wpf-radius:0;
   --wpf-shadow:0 14px 40px rgba(36,31,26,.08);
 }
@@ -48,7 +48,7 @@
   max-width:720px;
   margin:12px 0 0;
   font-size:16px;
-  line-height:1.65;
+  line-height:1.3;
   color:var(--wpf-muted);
 }
 .wpf-progress-wrap{
@@ -259,7 +259,7 @@
 #wpf-app .wpf-shell{background:#ffffff;border-color:#e7dfd6;border-radius:0}
 #wpf-app .wpf-intro-cover{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:#ffffff}
 #wpf-app .wpf-cover-copy{padding:clamp(30px,6vw,76px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
-#wpf-app .wpf-cover-subtitle{font-family:inherit;font-size:clamp(16px,2vw,22px);line-height:1;color:var(--wpf-ink);margin:20px 0 0}
+#wpf-app .wpf-cover-subtitle{font-family:inherit;font-size:clamp(16px,2vw,22px);line-height:1.1;color:var(--wpf-ink);margin:20px 0 0}
 #wpf-app .wpf-cover-copy .wpf-btn{margin-top:26px}
 #wpf-app .wpf-cover-foot{font-size:12px;letter-spacing:.02em;color:#786f64;margin-top:20px}
 #wpf-app .wpf-cover-art{min-height:440px}
