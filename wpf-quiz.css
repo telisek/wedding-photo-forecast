@@ -178,7 +178,7 @@
 .wpf-results{display:none}
 .wpf-results.is-visible{display:block}
 .wpf-results-hero{
-  padding:38px 34px 28px;
+  padding:0px 34px 28px 34px;
   background:var(--wpf-bg);
   border-bottom:1px solid var(--wpf-line);
 }
@@ -278,8 +278,8 @@
 #wpf-app .wpf-illustrated-options .wpf-inspiration{width:100%}
 #wpf-app .wpf-illustrated-options .wpf-option-photo{width:100%;height:155px;aspect-ratio:3/1}
 #wpf-app .wpf-illustrated-options .wpf-option-copy{padding:17px;width:100%}
-#wpf-app .wpf-results-hero{text-align:center;padding-top:42px}
-#wpf-app .wpf-results-title{text-transform: uppercase;font-size:clamp(32px,4.3vw,52px);font-weight:300;margin:22px auto 12px}
+#wpf-app .wpf-results-hero{text-align:center;padding-top:0px;}
+#wpf-app .wpf-results-title{text-transform: uppercase;font-size:clamp(32px,4.3vw,52px);font-weight:300;padding-top: 1.5em;margin:22px auto 12px}
 #wpf-app .wpf-results-sub{max-width:660px;margin:auto}
 #wpf-app .wpf-results-hero .wpf-chips{justify-content:center}
 #wpf-app .wpf-results-art{width:100%;max-width:760px;margin:22px auto 0}
