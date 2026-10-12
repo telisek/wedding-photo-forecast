@@ -25,7 +25,10 @@
   overflow:hidden;
   box-shadow:var(--wpf-shadow);
 }
-.wpf-header{padding:34px 34px 20px}
+.wpf-header{
+  padding:34px 34px 20px;
+  background:var(--wpf-accent-soft);
+}
 .wpf-eyebrow{
   margin:0 0 8px;
   font-size:12px;
@@ -47,7 +50,10 @@
   line-height:1.65;
   color:var(--wpf-muted);
 }
-.wpf-progress-wrap{padding:0 34px 28px}
+.wpf-progress-wrap{
+  padding:0 34px 28px;
+  background:var(--wpf-accent-soft); 
+}
 .wpf-progress-meta{
   display:flex;
   justify-content:space-between;
@@ -156,11 +162,13 @@
 .wpf-btn{
   appearance:none;
   border:0;
-  border-radius:999px;
   min-height:48px;
   padding:12px 20px;
-  font:inherit;
-  font-weight:700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-family: Sweetsanspro, Tahoma, sans-serif;
+  font-size: 0.9em;
+  text-decoration: none;
   cursor:pointer;
 }
 .wpf-btn-primary{background:var(--wpf-ink);color:white}
@@ -250,7 +258,7 @@
 #wpf-app .wpf-shell{background:#ffffff;border-color:#e7dfd6;border-radius:0}
 #wpf-app .wpf-intro-cover{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:#ffffff}
 #wpf-app .wpf-cover-copy{padding:clamp(30px,6vw,76px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
-#wpf-app .wpf-cover-subtitle{font-family:inherit;font-size:clamp(22px,3vw,33px);line-height:1.24;color:var(--wpf-accent);margin:20px 0 0}
+#wpf-app .wpf-cover-subtitle{font-family:inherit;font-size:clamp(16px,2vw,22px);line-height:1;color:var(--wpf-ink);margin:20px 0 0}
 #wpf-app .wpf-cover-copy .wpf-btn{margin-top:26px}
 #wpf-app .wpf-cover-foot{font-size:12px;letter-spacing:.02em;color:#786f64;margin-top:20px}
 #wpf-app .wpf-cover-art{min-height:440px}
@@ -270,7 +278,7 @@
 #wpf-app .wpf-illustrated-options .wpf-option-photo{width:100%;height:155px;aspect-ratio:3/1}
 #wpf-app .wpf-illustrated-options .wpf-option-copy{padding:17px;width:100%}
 #wpf-app .wpf-results-hero{text-align:center;padding-top:42px}
-#wpf-app .wpf-results-title{font-family:inherit;font-size:clamp(32px,4.3vw,52px);font-weight:400;margin:22px auto 12px}
+#wpf-app .wpf-results-title{text-transform: uppercase;font-size:clamp(32px,4.3vw,52px);font-weight:300;margin:22px auto 12px}
 #wpf-app .wpf-results-sub{max-width:660px;margin:auto}
 #wpf-app .wpf-results-hero .wpf-chips{justify-content:center}
 #wpf-app .wpf-results-art{width:100%;max-width:760px;margin:22px auto 0}
@@ -283,8 +291,8 @@
 #wpf-app .wpf-photo-grid:has(> :only-child){grid-template-columns:1fr}
 #wpf-app .wpf-photo-grid:has(> :only-child) > *{aspect-ratio:16/7}
 #wpf-app .wpf-three-images{grid-template-columns:repeat(3,minmax(0,1fr))}
-#wpf-app .wpf-expert{background:#e0ded2;padding:34px;margin:28px 34px 10px;border-left:3px solid #79634f}
-#wpf-app .wpf-expert h3{font-family:inherit;font-size:26px;font-weight:400;margin:10px 0}
+#wpf-app .wpf-expert{background:#e5e4de;padding:34px;margin:28px 34px 10px;border-left:3px solid #376141}
+#wpf-app .wpf-expert h3{font-size:26px;font-weight:400;margin:10px 0}
 #wpf-app .wpf-expert p:last-child{line-height:1.7;color:#5e5349;margin:0}
 #wpf-app .wpf-email{background:#376141;text-align:center;padding:42px}
 #wpf-app .wpf-email h3{font-family:inherit;font-size:clamp(28px,3.5vw,40px);font-weight:400}
@@ -298,25 +306,22 @@
 @media(max-width:700px){#wpf-app .wpf-three-images{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}#wpf-app .wpf-three-images figcaption{font-size:10px;padding:15px 6px 7px}}
 
 /* Design update v6 — square corners, white canvas, brand green */
-#wpf-app, #wpf-app .wpf-shell, #wpf-app .wpf-intro-cover,
-#wpf-app .wpf-header, #wpf-app .wpf-body, #wpf-app .wpf-results,
+#wpf-app, #wpf-app .wpf-shell, #wpf-app .wpf-intro-cover, #wpf-app .wpf-body, #wpf-app .wpf-results,
 #wpf-app .wpf-results-hero, #wpf-app .wpf-result-grid,
-#wpf-app .wpf-card, #wpf-app .wpf-stat {background-color:#ffffff;}
+#wpf-app .wpf-card {background-color:#ffffff;}
 #wpf-app .wpf-option:has(input:checked) {background-color:var(--wpf-accent-soft);}
 #wpf-app .wpf-option span {font-weight:300;}
 #wpf-app .wpf-shell, #wpf-app .wpf-select, #wpf-app .wpf-field,
-#wpf-app .wpf-card, #wpf-app .wpf-stat, #wpf-app .wpf-btn,
+#wpf-app .wpf-card, #wpf-app .wpf-btn,
 #wpf-app .wpf-chip, #wpf-app .wpf-email, #wpf-app .wpf-expert,
 #wpf-app .wpf-photo, #wpf-app .wpf-photo-placeholder,
-#wpf-app .wpf-priority-count, #wpf-app .wpf-progress,
-#wpf-app .wpf-progress-bar {border-radius:0;}
+#wpf-app .wpf-priority-count {border-radius:0;}
 #wpf-app .wpf-option {border-radius:1px;}
 #wpf-app .wpf-results-art {width:100%; max-width:none; margin:22px 0 0; overflow:hidden;}
 #wpf-app .wpf-results-art .wpf-photo,
 #wpf-app .wpf-results-art .wpf-photo-placeholder {width:100%;height:280px;aspect-ratio:auto;}
 #wpf-app .wpf-results-art .wpf-photo img {display:block;width:100%;height:100%;object-fit:cover;}
 #wpf-app .wpf-photo figcaption {display:none;}
-#wpf-app .wpf-title, #wpf-app .wpf-question, #wpf-app .wpf-results-title,
 #wpf-app .wpf-card h3, #wpf-app .wpf-expert h3,
 #wpf-app .wpf-email h3, #wpf-app .wpf-cover-subtitle {font-family:inherit;}
 #wpf-app .wpf-expert {background:#e0ded2;}
